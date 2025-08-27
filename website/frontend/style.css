@@ -1,0 +1,276 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: none;
+    max-width: 500px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+h1, h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #fff;
+}
+
+button {
+    background: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px 0;
+    width: 100%;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #ff4500;
+    transform: scale(1.07);
+}
+
+input, select, textarea {
+    width: 95%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Navigation Tabs */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.tabs button:hover {
+    color: #ffcc00;
+}
+
+/* Login Page */
+#login-page {
+    display: none;
+}
+
+#login-page h1 {
+    margin-bottom: 30px;
+}
+
+#login-page p {
+    margin-bottom: 20px;
+}
+
+#login-page a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#login-page a:hover {
+    text-decoration: underline;
+}
+
+/* Registration Page */
+#register-page {
+    display: none;
+}
+
+#register-page h2 {
+    margin-bottom: 30px;
+}
+
+#register-page a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#register-page a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard */
+#dashboard {
+    display: none;
+    max-width: 650px;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.data-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.data-card p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.logout-btn {
+    margin-top: 20px;
+    background: #ff3333;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background: #cc0000;
+}
+
+/* Edit Profile Form */
+#edit-profile {
+    display: none;
+}
+
+#edit-profile h2 {
+    margin-bottom: 30px;
+}
+
+#edit-profile input[type="password"] {
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: #666;
+    margin-top: 10px;
+}
+
+.back-btn:hover {
+    background: #555;
+}
+
+/* Error Message Styling */
+p[id$="-error"] {
+    color: #ff3333;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none; /* Hidden by default */
+}
+
+/* Loading Indicator */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Role-Specific Fields */
+#extra-fields, #edit-extra-fields {
+    margin-top: 15px;
+}
+
+#extra-fields label, #edit-extra-fields label {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+
+#extra-fields input, #edit-extra-fields input {
+    width: 95%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1, h2 {
+        font-size: 24px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    input, select, textarea {
+        font-size: 15px;
+    }
+
+    .tabs button {
+        font-size: 14px;
+    }
+
+    .data-card p {
+        font-size: 16px;
+    }
+}

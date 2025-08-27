@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Waste Management</title>
+    <link rel="stylesheet" href="style.css"> <!-- Ensure this path is correct -->
+    <link rel="icon" href="data:,"> <!-- Blank favicon to prevent 404 error -->
+    <script defer src="script.js"></script> <!-- Link to external JavaScript file -->
+</head>
+<body>
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <button onclick="showLogin()">Home</button>
+        <button onclick="showRegister()">Register</button>
+        <button id="logout-btn" class="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="container">
+        <h1>Smart Waste Management</h1>
+        <p>Select Your Role:</p>
+        <select id="role-selection">
+            <option value="municipal">Municipal Authority</option>
+            <option value="citizen">Citizen</option>
+            <option value="driver">Truck Driver</option>
+        </select>
+        <input type="email" id="login-email" placeholder="Enter Email" required>
+        <input type="password" id="login-password" placeholder="Enter Password" required>
+        <button onclick="login()">Login</button>
+        <p>New user? <a href="#" onclick="showRegister()">Register here</a></p>
+        <p id="login-error" style="color: red; display: none;"></p> <!-- Error message for login -->
+    </div>
+
+    <!-- Registration Page -->
+    <div id="register-page" class="container">
+        <h2>Register</h2>
+        <select id="register-role" onchange="updateRegistrationFields()">
+            <option value="municipal">Municipal Authority</option>
+            <option value="citizen">Citizen</option>
+            <option value="driver">Truck Driver</option>
+        </select>
+        <div id="registration-fields">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter Name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter Email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" placeholder="Enter Phone Number" pattern="\d{10}" title="Please enter a 10-digit phone number" required>
+            <div id="extra-fields"></div>
+        </div>
+        <button onclick="register()">Register</button>
+        <p>Already registered? <a href="#" onclick="showLogin()">Login here</a></p>
+        <p id="register-error" style="color: red; display: none;"></p> <!-- Error message for registration -->
+    </div>
+<!-- Dashboard -->
+<div id="dashboard" class="container">
+    <h2>Dashboard</h2>
+
+    <!-- Sensor Data Table -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Bin Location</th>
+                <th>Fill Level</th>
+               <!-- <th>Weight</th>-->
+                <th>Flame Detected</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="sensorTableBody">
+            <!-- Sensor data will be inserted here -->
+        </tbody>
+    </table>
+</div>
+
+        
+        
+    
+
+       <!--ADDED: Raw Sensor Data Display 
+        <h3>Raw Sensor Data</h3>
+        <div id="sensorDataDisplay" style="white-space: pre-wrap; background: #f4f4f4; padding: 10px; border: 1px solid #ccc;"></div>
+
+        <button onclick="showEditProfile()">Edit Profile</button>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>-->
+
+    <!-- Edit Profile Form -->
+    <!--
+    <div id="edit-profile" class="container">
+        <h2>Edit Profile</h2>
+        <div id="edit-profile-fields">
+            <label for="edit-name">Name:</label>
+            <input type="text" id="edit-name" placeholder="Enter Name" required>
+            <label for="edit-email">Email:</label>
+            <input type="email" id="edit-email" placeholder="Enter Email" required>
+            <label for="edit-phone">Phone Number:</label>
+            <input type="text" id="edit-phone" placeholder="Enter Phone Number" pattern="\d{10}" title="Please enter a 10-digit phone number" required>
+            <label for="edit-password">New Password:</label>
+            <input type="password" id="edit-password" placeholder="Enter New Password">
+            <div id="edit-extra-fields"></div>
+        </div>
+        <button onclick="updateProfile()">Save Changes</button>
+        <button class="back-btn" onclick="showDashboard()">Back</button>
+        <p id="edit-profile-error" style="color: red; display: none;"></p> 
+    </div>-->
+</body>
+</html>
