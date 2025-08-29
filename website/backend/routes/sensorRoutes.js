@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const SensorData = require("../models/SensorData");
+const SensorData = require("../models/sensorData");
 
 // Insert Sensor Data (via HTTP POST)
 router.post("/add", async (req, res) => {
