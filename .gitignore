@@ -137,3 +137,29 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Custom additions for IoT Waste Management
+# Server logs
+website/frontend/server.log
+
+# Vercel
+.vercel
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# VS Code
+.vscode/settings.json
+
+# IDEs
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp

@@ -1,29 +1,47 @@
 {
-  "name": "iot-waste-management-backend",
+  "name": "iot-waste-management",
   "version": "1.0.0",
-  "description": "Backend API for IoT Waste Management System",
+  "description": "IoT Waste Management System with real-time monitoring",
   "main": "website/backend/server.js",
   "scripts": {
-    "start": "node website/backend/server.js",
-    "dev": "nodemon website/backend/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cd website/backend && npm start",
+    "dev": "cd website/backend && npm run dev",
+    "build": "echo 'Building project...' && cd website/backend && npm install",
+    "test": "cd website/backend && npm test",
+    "vercel-build": "cd website/backend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venev-g/IoT-waste-management.git"
   },
   "keywords": [
     "iot",
     "waste-management",
     "mongodb",
     "express",
-    "api"
+    "javascript",
+    "real-time",
+    "sensors"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "venev-g",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/venev-g/IoT-waste-management/issues"
+  },
+  "homepage": "https://github.com/venev-g/IoT-waste-management#readme",
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.18.0",
+    "mongoose": "^8.18.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.9"
   }
 }

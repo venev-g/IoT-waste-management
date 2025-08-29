@@ -1,9 +1,21 @@
-const BASE_URL = "http://localhost:5000"; // Ensure this matches your backend server URL
+// Environment-based API URL configuration
+const getApiUrl = () => {
+    // Check if we're in production (deployed)
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        // In production, API calls go to the same domain
+        return window.location.origin;
+    }
+    // In development, use localhost backend
+    return "http://localhost:5000";
+};
+
+const BASE_URL = getApiUrl();
 
 // Debug function to test connectivity
 async function testConnection() {
     try {
         console.log("Testing connection to backend...");
+        console.log("Using API URL:", BASE_URL);
         const response = await fetch(`${BASE_URL}/health`);
         const data = await response.json();
         console.log("Backend connection successful:", data);
