@@ -1,4 +1,18 @@
-const BASE_URL = "http://localhost:5001"; // Ensure this matches your backend server URL
+const BASE_URL = "http://localhost:5000"; // Ensure this matches your backend server URL
+
+// Debug function to test connectivity
+async function testConnection() {
+    try {
+        console.log("Testing connection to backend...");
+        const response = await fetch(`${BASE_URL}/health`);
+        const data = await response.json();
+        console.log("Backend connection successful:", data);
+        return true;
+    } catch (error) {
+        console.error("Backend connection failed:", error);
+        return false;
+    }
+}
 
 // Show Login Page
 function showLogin() {
@@ -176,6 +190,60 @@ function showDashboard() {
     document.getElementById("dashboard").style.display = "block";
     document.getElementById("logout-btn").style.display = "block"; // Show logout button
     fetchSensorData(); // Fetch and display sensor data
+    
+    // Add event listener for sensor form
+    const sensorForm = document.getElementById("sensor-form");
+    if (sensorForm) {
+        sensorForm.addEventListener("submit", addSensorData);
+    }
+}
+
+// Add Sensor Data Function
+async function addSensorData(event) {
+    event.preventDefault();
+    
+    const binLocation = document.getElementById("bin-location").value.trim();
+    const fillLevel = parseInt(document.getElementById("fill-level").value);
+    const flameDetected = document.getElementById("flame-detected").value === "true";
+    
+    if (!binLocation || isNaN(fillLevel)) {
+        alert("Please fill in all fields correctly.");
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${BASE_URL}/api/sensors/add`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                binLocation,
+                fillLevel,
+                flameDetected
+            }),
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log("Sensor data added:", result);
+        
+        // Clear form
+        document.getElementById("sensor-form").reset();
+        
+        // Refresh sensor data display
+        fetchSensorData();
+        
+        // Show success message
+        alert("Sensor data added successfully!");
+        
+    } catch (error) {
+        console.error("Error adding sensor data:", error);
+        alert("Failed to add sensor data. Please try again.");
+    }
 }
 
 window.onload = function () {
@@ -196,28 +264,37 @@ async function fetchSensorData() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                // Remove authorization header since sensor data doesn't require auth
             }
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
+            console.error(`HTTP Error: ${response.status}`);
+            // Don't throw error for non-200 status, try to parse response
         }
 
         const data = await response.json();
+        console.log("Fetched Sensor Data Response:", data);
 
-        //  Extract sensor data only
+        //  Extract sensor data array (handle both error and success responses)
         const sensorDataArray = data.sensorData || [];
-
-        console.log("Fetched Sensor Data:", sensorDataArray);
-
-        if (!Array.isArray(sensorDataArray)) {
-            console.error("Unexpected API response format:", data);
-            return;
-        }
 
         //  Update Sensor Table
         sensorTableBody.innerHTML = "";
+
+        if (sensorDataArray.length === 0) {
+            // Show message when no data is available
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td colspan="5" style="text-align: center; color: #666;">
+                    No sensor data available. Add some sensor data to see it here.
+                </td>
+            `;
+            sensorTableBody.appendChild(row);
+            return;
+        }
+
+        // Populate table with sensor data
         sensorDataArray.forEach((sensor, index) => {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -232,7 +309,18 @@ async function fetchSensorData() {
 
     } catch (error) {
         console.error("Error fetching sensor data:", error);
-        alert("Failed to fetch sensor data. Please check the backend.");
+        
+        // Show error in table instead of alert
+        const sensorTableBody = document.getElementById("sensorTableBody");
+        if (sensorTableBody) {
+            sensorTableBody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align: center; color: #ff6b6b;">
+                        ⚠️ Error loading sensor data. Please check if the backend server is running.
+                    </td>
+                </tr>
+            `;
+        }
     }
 }
 
@@ -355,8 +443,19 @@ async function updateProfile() {
 }
 */
 // Initialize Page
-function init() {
+async function init() {
+    console.log("Initializing application...");
+    
+    // Test backend connection
+    const connected = await testConnection();
+    if (!connected) {
+        console.warn("Backend connection failed - some features may not work");
+    }
+    
     showLogin(); // Show login page by default
+    
+    // Test sensor data fetch on startup
+    fetchSensorData();
 }
 
 // Event Listeners

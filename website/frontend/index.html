@@ -14,6 +14,7 @@
         <button onclick="showLogin()">Home</button>
         <button onclick="showRegister()">Register</button>
         <button id="logout-btn" class="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+        <button onclick="testConnection()" style="background: #007bff; color: white;">Test Backend</button>
     </div>
 
     <!-- Login Page -->
@@ -58,6 +59,31 @@
 <!-- Dashboard -->
 <div id="dashboard" class="container">
     <h2>Dashboard</h2>
+
+    <!-- Add Sensor Data Form -->
+    <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
+        <h3>Add Sensor Data (for testing)</h3>
+        <form id="sensor-form" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: end;">
+            <div>
+                <label>Bin Location:</label><br>
+                <input type="text" id="bin-location" placeholder="e.g., Main Street #1" required>
+            </div>
+            <div>
+                <label>Fill Level (%):</label><br>
+                <input type="number" id="fill-level" min="0" max="100" placeholder="0-100" required>
+            </div>
+            <div>
+                <label>Flame Detected:</label><br>
+                <select id="flame-detected" required>
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Add Data</button>
+            </div>
+        </form>
+    </div>
 
     <!-- Sensor Data Table -->
     <table border="1">

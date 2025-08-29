@@ -37,27 +37,34 @@ router.post("/add", async (req, res) => {
     }
 });
 
-//  Fetch Latest Sensor Data
+//  Fetch All Sensor Data (Modified to return all data, not just latest)
 router.get("/all", async (req, res) => {
     try {
-        const latestData = await SensorData.find().sort({ timestamp: -1 }).limit(1);
+        // Fetch all sensor data, sorted by timestamp (newest first)
+        const allData = await SensorData.find().sort({ timestamp: -1 });
 
-        if (!latestData || latestData.length === 0) {
-            return res.status(404).json({ message: "No sensor data found" });
+        // If no data found, return empty array instead of 404
+        if (!allData || allData.length === 0) {
+            return res.status(200).json({ sensorData: [] });
         }
 
-        const sensorData = [{
-            binLocation: latestData[0].binLocation || "N/A",
-            fillLevel: latestData[0].fillLevel !== undefined ? latestData[0].fillLevel : "N/A",
-            flameDetected: latestData[0].flameDetected || false,
-            timestamp: latestData[0].timestamp,
-        }];
+        // Format the data for frontend
+        const sensorData = allData.map(sensor => ({
+            binLocation: sensor.binLocation || "N/A",
+            fillLevel: sensor.fillLevel !== undefined ? sensor.fillLevel : "N/A",
+            flameDetected: sensor.flameDetected || false,
+            timestamp: sensor.timestamp,
+        }));
 
         res.status(200).json({ sensorData });
 
     } catch (error) {
         console.error("Error fetching sensor data:", error);
-        res.status(500).json({ error: "Error fetching sensor data", details: error.message });
+        res.status(500).json({ 
+            error: "Error fetching sensor data", 
+            details: error.message,
+            sensorData: [] // Return empty array on error for frontend compatibility
+        });
     }
 });
 
