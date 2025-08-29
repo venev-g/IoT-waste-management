@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/venev-g/IoT-waste-management#readme",
   "engines": {
-    "node": "18.x",
+    "node": "22.x",
     "npm": "9.x"
   },
   "dependencies": {
