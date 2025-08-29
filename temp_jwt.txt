@@ -1,0 +1,1 @@
+JWT_SECRET=iot-waste-management-super-secure-jwt-secret-2025-production-key-32chars
