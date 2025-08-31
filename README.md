@@ -13,8 +13,7 @@ A comprehensive IoT waste management system with real-time sensor monitoring, us
 
 ## 🚀 Live Demo
 
-- **Frontend**: [https://your-app.vercel.app](https://your-app.vercel.app)
-- **API**: [https://your-app.vercel.app/api](https://your-app.vercel.app/api)
+- **Frontend**: [https://iot-management.vercel.app](https://iot-management.vercel.app)
 
 ## 🏗️ Tech Stack
 
